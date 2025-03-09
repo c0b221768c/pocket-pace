@@ -1,0 +1,4 @@
+.git/objects
+.git/lfs
+.git/index
+.git/logs

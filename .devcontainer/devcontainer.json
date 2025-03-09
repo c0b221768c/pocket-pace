@@ -1,0 +1,30 @@
+{
+    "name": "Pocket Pace Dev",
+    "dockerComposeFile": [
+        "../compose.yml"
+    ],
+    "service": "pocket-pace",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "python.defaultInterpreterPath": "/app/.venv/bin/python"
+            },
+            "extensions": [
+        	"ms-python.python",  // Python拡張機能
+        	"charliermarsh.ruff", // Ruff拡張機能
+			"formulahendry.code-runner" // Code Runner拡張機能
+    		],
+            "keybindings": [
+                {
+                    "key": "shift+alt+n",
+                    "command": "code-runner.run",
+                    "when": "editorTextFocus"
+                }
+            ]
+        }
+    },
+    "postCreateCommand": "/bin/bash /app/startup.sh",
+    "remoteUser": "root"
+}

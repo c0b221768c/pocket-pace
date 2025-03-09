@@ -1,0 +1,17 @@
+services:
+  pocket-pace:
+    build:
+      context: ./docker  # Dockerfile があるディレクトリを指定
+    container_name: pocket-pace
+    volumes:
+      - .vscode:/app/.vscode
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+      - ./pyproject.toml:/app/pyproject.toml
+      - ./.pre-commit-config.yaml:/app/.pre-commit-config.yaml
+      - ./setup/startup.sh:/app/startup.sh
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app
+    stdin_open: true  # コンテナの標準入力を開いたままにする
+    tty: true         # 仮想端末を有効化（シェル操作を可能にする）

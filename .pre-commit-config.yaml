@@ -1,0 +1,16 @@
+repos:
+  - repo: local
+    hooks:
+      # コミットメッセージのチェック
+      - id: commit-msg
+        name: Commit Message Format Check
+        entry: uv run scripts/commit-msg.py
+        language: python
+        stages: [commit-msg]
+      
+      # バージョンの同期チェック(push前)
+      - id: sync-version
+        name: Sync Project Version with Git Tag
+        entry: uv run scripts/sync-version.py
+        language: python
+        stages: [pre-push]
