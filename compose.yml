@@ -1,7 +1,8 @@
 services:
   pocket-pace:
     build:
-      context: ./docker  # Dockerfile があるディレクトリを指定
+      context: .
+      dockerfile: docker/Dockerfile
     container_name: pocket-pace
     volumes:
       - .vscode:/app/.vscode
@@ -9,7 +10,6 @@ services:
       - ./scripts:/app/scripts
       - ./pyproject.toml:/app/pyproject.toml
       - ./.pre-commit-config.yaml:/app/.pre-commit-config.yaml
-      - ./setup/startup.sh:/app/startup.sh
     working_dir: /app
     environment:
       - PYTHONPATH=/app

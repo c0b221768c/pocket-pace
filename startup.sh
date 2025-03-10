@@ -56,4 +56,5 @@ if echo "$SSH_OUTPUT" | grep -q "You've successfully authenticated"; then
     exit 0
 else
     echo "❌ GitHub への SSH 接続に失敗しました。"
+fi
 echo "✅ postCreateCommand setup completed!"
