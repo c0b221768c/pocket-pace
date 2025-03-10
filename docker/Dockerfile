@@ -10,4 +10,3 @@ RUN apt update && apt install -y git curl dos2unix
 RUN curl -fsSL https://astral.sh/uv/install.sh | bash
 
 COPY .git /app/.git
-COPY startup.sh /app/startup.sh
