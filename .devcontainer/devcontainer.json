@@ -9,7 +9,8 @@
         "vscode": {
             "settings": {
                 "terminal.integrated.defaultProfile.linux": "bash",
-                "python.defaultInterpreterPath": "/app/.venv/bin/python"
+                "python.defaultInterpreterPath": "/app/.venv/bin/python",
+                "files.eol": "\n"
             },
             "extensions": [
         	"ms-python.python",  // Python拡張機能
