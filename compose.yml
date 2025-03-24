@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     container_name: pocket-pace
+    ports:
+      - "8550:8550"
     volumes:
       - .vscode:/app/.vscode
       - ./src:/app/src
@@ -15,3 +17,16 @@ services:
       - PYTHONPATH=/app
     stdin_open: true  # コンテナの標準入力を開いたままにする
     tty: true         # 仮想端末を有効化（シェル操作を可能にする）
+
+  db:
+    image: postgres:latest
+    container_name: postgres_pp
+    restart: always
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data

@@ -11,3 +11,5 @@ RUN curl -fsSL https://astral.sh/uv/install.sh | bash
 
 COPY .git /app/.git
 COPY startup.sh /app/startup.sh
+
+EXPOSE 8550
