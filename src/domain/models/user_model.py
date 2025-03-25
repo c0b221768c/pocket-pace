@@ -57,3 +57,12 @@ class UserModel:
             user_id,
         )
         return rows[0] if rows else None
+
+    async def get_by_identifier(self, identifier: str):
+        query = """
+            SELECT * FROM users
+            WHERE email = $1 OR name = $1
+            LIMIT 1
+        """
+        rows = await self.db.fetch(query, identifier)
+        return rows[0] if rows else None

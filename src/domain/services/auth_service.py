@@ -1,5 +1,5 @@
 from domain.models.user_model import UserModel
-from shared.security import hash_password
+from shared.security import hash_password, verify_password
 
 
 class AuthService:
@@ -12,16 +12,17 @@ class AuthService:
         print(f"User {name} registered successfully!")
 
     async def login_user(self, identifier, password):
-        hashed_pw = hash_password(password)
-        user = await self.user_model.get_user_by_identifier_and_password(
-            identifier, hashed_pw
-        )
-        if user:
-            print(f"User {user['name']} logged in successfully!")
-            return user["id"]
-        else:
-            print("Invalid email or username or password")
+        user = await self.user_model.get_by_identifier(identifier)
+        if not user:
+            print("❌ Invalid email or username.")
             return None
+
+        if not verify_password(password, user["password"]):
+            print("❌ Invalid password.")
+            return None
+
+        print(f"✅ User {user['name']} logged in successfully!")
+        return user["id"]
 
     async def change_user_name(self, user_id: int, new_name: str):
         await self.user_model.update_user_name(user_id, new_name)
@@ -31,6 +32,7 @@ class AuthService:
 
     async def change_password(self, user_id: int, current_pw: str, new_pw: str):
         user = await self.user_model.get_by_id(user_id)
-        if not user or user["password"] != hash_password(current_pw):
+        if not user or not verify_password(current_pw, user["password"]):
             return False
         await self.user_model.update_password(user_id, hash_password(new_pw))
+        return True
